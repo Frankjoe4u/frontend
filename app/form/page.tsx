@@ -32,7 +32,6 @@ export default function FormPage() {
     const result = schema.safeParse(fields);
     if (!result.success) {
       const fieldErrors: FormErrors = {};
-      // Zod v4 uses .issues instead of .errors
       result.error.issues.forEach((issue: z.ZodIssue) => {
         const field = issue.path[0] as string;
         fieldErrors[field] = issue.message;
@@ -66,8 +65,8 @@ export default function FormPage() {
   };
 
   const inputClass = (field: string) =>
-    "w-full px-3 py-2 border rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-300 " +
-    (errors[field] ? "border-red-400" : "border-gray-300");
+    "w-full px-3 py-2 border rounded-md text-sm outline-none focus:ring-2 focus:ring-blue-400 bg-gray-800 text-white placeholder-gray-400 " +
+    (errors[field] ? "border-red-400" : "border-gray-600");
 
   return (
     <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
@@ -99,7 +98,7 @@ export default function FormPage() {
                 setFirstName(e.target.value);
                 handleChange("firstName", e.target.value);
               }}
-              placeholder="John"
+              placeholder="Peter"
               className={inputClass("firstName")}
             />
             {errors.firstName && (
@@ -118,7 +117,7 @@ export default function FormPage() {
                 setLastName(e.target.value);
                 handleChange("lastName", e.target.value);
               }}
-              placeholder="Doe"
+              placeholder="Obi"
               className={inputClass("lastName")}
             />
             {errors.lastName && (
@@ -137,7 +136,7 @@ export default function FormPage() {
                 setEmail(e.target.value);
                 handleChange("email", e.target.value);
               }}
-              placeholder="john@example.com"
+              placeholder="frankjoe@gmail.com"
               className={inputClass("email")}
             />
             {errors.email && (
